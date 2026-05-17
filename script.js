@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const world = document.getElementById("world");
   const scrollWrapper = document.getElementById("scroll-wrapper");
   const lyricsContainer = document.getElementById("lyrics-container");
+  const popoutSubtitle = document.getElementById("popout-subtitle");
+  const finalMessage = document.getElementById("final-message");
   const bee2Wrapper = document.getElementById("bee2Wrapper");
   const bee2 = document.getElementById("bee2");
   const finalBtnGroup = document.getElementById("finalBtnGroup");
@@ -86,6 +88,18 @@ document.addEventListener("DOMContentLoaded", () => {
     { time: 120.0, text: "" },
   ];
 
+  const popoutData = [
+    { start: 10.0, end: 16.0, text: "<span style='color: #eab308;'>Bees</span>— they remind me of you." },
+    { start: 19.0, end: 27.0, text: "I'm thankful they exist, not simply because of their contributions to our ecosystem, but also because they gave you something to adore, something you end up telling me about." },
+    { start: 30.0, end: 35.0, text: "Funny how <span style='color: #eab308;'>bees</span> somehow helped me fall in love" },
+    { start: 39.0, end: 49.0, text: "I love the way you observe things, you deeply study and know them. And you even jokingly feel for them sometimes, \"what if hurt yung hito sa sinasabi mo\" HOW ADORABLE" },
+    { start: 52.0, end: 56.0, text: "AT KAHIT AKO NAG TRA-TRANSITION NA SA KUNG ANO YUNG MINAMAHAL KO SAYO GRABE" },
+    { start: 70.0, end: 80.0, text: "Thank you for changing my perspective about things, I can say I can see better now because of you. SALAMIN YARRRRRRRN GAGAAHAHAHAHAHA" },
+    { start: 82.0, end: 90.0, text: "I used to always think nothing in this lifetime would matter in the end" },
+    { start: 92.0, end: 99.0, text: "but you showed me the great relevance of things, regardless if big or small. you notice the unnoticed, love the unloved." },
+    { start: 102.0, end: 115.0, text: "When I look at the furthest future, all I see is void — nothingness, just an empty strong shade of black, but you reminded me that I am still living in the present, where things do still matter, where you and I still exist." }
+  ];
+
   const TIME_OFFSET = 0.0;
 
   let lastText = "";
@@ -141,6 +155,23 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       twilightOverlay.style.opacity = "0";
       lyricsContainer.classList.remove("twilight-text");
+    }
+
+    let currentPopout = "";
+    for (let i = 0; i < popoutData.length; i++) {
+      if (currentTime >= popoutData[i].start && currentTime <= popoutData[i].end) {
+        currentPopout = popoutData[i].text;
+        break;
+      }
+    }
+
+    if (popoutSubtitle.innerHTML !== currentPopout) {
+      if (currentPopout === "") {
+        popoutSubtitle.style.opacity = "0";
+      } else {
+        popoutSubtitle.innerHTML = currentPopout;
+        popoutSubtitle.style.opacity = "1";
+      }
     }
   });
 
@@ -255,6 +286,14 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       scrollWrapper.style.animationPlayState = "running";
     }, 1000);
+
+    setTimeout(() => {
+      finalMessage.style.display = "flex";
+      finalMessage.innerHTML = `<p>The moment our paths crossed, something inside me started burning once more, I feel life more deeply now, pain hurts more, food tastes better, music sounds deeper, and love feels real.</p><br><p>I'm hoping that I get to spend many many more months with you.</p><br><p style="font-weight: 600; font-size: 2rem; margin-top: 20px;">I LOVE YOU LILIANE</p>`;
+
+      void finalMessage.offsetWidth;
+      finalMessage.style.opacity = "1";
+    }, 5000);
 
     const container = document.createElement("div");
     container.style.position = "fixed";
