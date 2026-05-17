@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const world = document.getElementById("world");
   const scrollWrapper = document.getElementById("scroll-wrapper");
   const lyricsContainer = document.getElementById("lyrics-container");
+  const bee2Wrapper = document.getElementById("bee2Wrapper");
+  const bee2 = document.getElementById("bee2");
+  const finalBtnGroup = document.getElementById("finalBtnGroup");
+  const ewBtn = document.getElementById("ewBtn");
+  const kissyBtn = document.getElementById("kissyBtn");
+  const kissRejectMusic = document.getElementById("kissRejectMusic");
+  const mainBeeWrapper = document.getElementById("mainBeeWrapper");
 
   const lyricsData = [
     { time: 0.0, text: "" },
@@ -75,13 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "STRIKE UP THE BAND<br>AND MAKE THE FIREFLIES DANCE,<br>SILVER MOON'S SPARKLING",
     },
     { time: 106.0, text: "" },
-    { time: 109.0, text: "SO KISS ME" },
+    { time: 109.0, text: "SO KISS ME?..." },
     { time: 120.0, text: "" },
   ];
 
   const TIME_OFFSET = 0.0;
 
   let lastText = "";
+  let isTwilight = false;
+  const twilightOverlay = document.getElementById("twilight-overlay");
+  let finalSceneTriggered = false;
 
   bgMusic.addEventListener("timeupdate", () => {
     const currentTime = bgMusic.currentTime - TIME_OFFSET;
@@ -94,6 +104,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    if (currentTime >= 109.0 && !finalSceneTriggered) {
+      finalSceneTriggered = true;
+      scrollWrapper.style.animationPlayState = "paused";
+
+      bee2Wrapper.style.display = "block";
+
+      // Force hardware reflow to flush the new transform start state
+      void bee2Wrapper.offsetWidth;
+
+      bee2Wrapper.style.transform = "translateX(0)";
+
+      setTimeout(() => {
+        finalBtnGroup.style.display = "flex";
+      }, 2000);
+    }
+
     if (lastText !== currentText) {
       lastText = currentText;
       if (currentText === "") {
@@ -102,6 +128,19 @@ document.addEventListener("DOMContentLoaded", () => {
         lyricsContainer.innerHTML = currentText;
         lyricsContainer.style.opacity = "1";
       }
+    }
+
+    // Maintain twilight through "OUT ON THE MOONLIT FLOOR"
+    isTwilight =
+      (currentTime >= 41.0 && currentTime < 48.0) ||
+      (currentTime >= 92.0 && currentTime < 98.0);
+
+    if (isTwilight) {
+      twilightOverlay.style.opacity = "1";
+      lyricsContainer.classList.add("twilight-text");
+    } else {
+      twilightOverlay.style.opacity = "0";
+      lyricsContainer.classList.remove("twilight-text");
     }
   });
 
@@ -117,14 +156,14 @@ document.addEventListener("DOMContentLoaded", () => {
     yesBtn.style.transform = `scale(${yesScale})`;
 
     const texts = [
-      "are you sure?",
-      "really sure?",
-      "think again!",
+      "umay sayo",
+      "HUUUYYY",
+      "Babe naman e",
       "last chance!",
-      "surely not?",
-      "you might regret this!",
+      "isa..",
+      "ge ha",
       "give it another thought!",
-      "are you absolutely certain?",
+      "hayek lang",
       "have a heart!",
       "don't be so cold!",
     ];
@@ -150,6 +189,8 @@ document.addEventListener("DOMContentLoaded", () => {
     bgMusic.volume = 0.5;
     bgMusic.play().catch((e) => console.log("Audio play failed:", e));
 
+    document.getElementById("yurikBadge").style.opacity = "1";
+
     mainTitle.innerHTML = `YAYYY! 🥰<br><span style="font-size: 1.5rem; font-weight: 500;">Enjoy your gift! 🎁</span>`;
     btnGroup.style.display = "none";
 
@@ -165,5 +206,86 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000);
       }, 1000);
     }, 1500);
+  });
+
+  let ewScale = 1;
+  let kissyScale = 1;
+  let finalTimeoutId = null;
+
+  ewBtn.addEventListener("click", () => {
+    ewScale -= 0.1;
+    kissyScale += 0.2;
+
+    ewBtn.style.transform = `scale(${ewScale})`;
+    kissyBtn.style.transform = `scale(${kissyScale})`;
+
+    const texts = [
+      "umay sayo",
+      "HUUUYYY",
+      "Babe naman e",
+      "last chance!",
+      "isa..",
+      "ge ha",
+      "give it another thought!",
+      "hayek lang",
+      "have a heart!",
+      "don't be so cold!",
+    ];
+
+    ewBtn.innerHTML = texts[Math.floor(Math.random() * texts.length)];
+
+    beeImg.src = "media/kissreject.webp";
+    kissRejectMusic.currentTime = 0;
+    kissRejectMusic.play().catch((e) => console.log(e));
+
+    if (finalTimeoutId) {
+      clearTimeout(finalTimeoutId);
+    }
+
+    finalTimeoutId = setTimeout(() => {
+      beeImg.src = "media/02ce7945c01a4d62f78e480ca9c51f00.gif";
+    }, 1500);
+  });
+
+  kissyBtn.addEventListener("click", () => {
+    mainBeeWrapper.style.transform = "translateX(20px)";
+    bee2Wrapper.style.transform = "translateX(-20px)";
+    finalBtnGroup.style.display = "none";
+
+    setTimeout(() => {
+      scrollWrapper.style.animationPlayState = "running";
+    }, 1000);
+
+    const container = document.createElement("div");
+    container.style.position = "fixed";
+    container.style.top = "0";
+    container.style.left = "0";
+    container.style.width = "100vw";
+    container.style.height = "100vh";
+    container.style.pointerEvents = "none";
+    container.style.zIndex = "50";
+    document.body.appendChild(container);
+
+    for (let i = 0; i < 40; i++) {
+      setTimeout(() => {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.style.position = "absolute";
+        heart.style.left = 45 + Math.random() * 10 + "vw";
+        heart.style.bottom = "50vh";
+        heart.style.fontSize = Math.random() * 2 + 1 + "rem";
+        heart.style.opacity = "1";
+        heart.style.transition = "all 2s ease-out";
+        container.appendChild(heart);
+
+        void heart.offsetWidth;
+
+        const xMove = (Math.random() - 0.5) * 200;
+        heart.style.transform = `translate(${xMove}px, -60vh) scale(1.5)`;
+        heart.style.opacity = "0";
+
+        setTimeout(() => heart.remove(), 2500);
+      }, i * 150);
+    }
   });
 });

@@ -1,246 +1,288 @@
 :root {
-    --bg-color: #b7fad0;
-    /* Light pastel green */
-    --text-color: #ff859d;
-    /* Pink text */
-    --btn-no: #ff9fb4;
-    /* Pink button */
-    --btn-yes: #2ceb16;
-    /* Bright green button */
+  --bg-color: #b7fad0;
+  /* Light pastel green */
+  --text-color: #ff859d;
+  /* Pink text */
+  --btn-no: #ff9fb4;
+  /* Pink button */
+  --btn-yes: #2ceb16;
+  /* Bright green button */
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--bg-color);
-    font-family: 'Inter', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  font-family: "Inter", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
 #world {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 200vh;
-    transform: translate(0, -100vh);
-    transition: transform 2s ease-in-out;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 200vh;
+  transform: translate(0, -100vh);
+  transition: transform 2s ease-in-out;
+  z-index: 1;
 }
 
 #scroll-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 600vw;
-    height: 200vh;
-    display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600vw;
+  height: 200vh;
+  display: flex;
+  z-index: 2;
+}
+
+#twilight-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 200vh;
+  background: url('media/milkytwilight.jpg') no-repeat center center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  z-index: 1;
 }
 
 .scroll-chunk {
-    position: relative;
-    width: 300vw;
-    height: 200vh;
-    flex-shrink: 0;
+  position: relative;
+  width: 300vw;
+  height: 200vh;
+  flex-shrink: 0;
 }
 
 .flying {
-    animation: infiniteScroll 18s linear infinite;
+  animation: infiniteScroll 18s linear infinite;
 }
 
 @keyframes infiniteScroll {
-    0% {
-        transform: translateX(0);
-    }
+  0% {
+    transform: translateX(0);
+  }
 
-    100% {
-        transform: translateX(-300vw);
-    }
+  100% {
+    transform: translateX(-300vw);
+  }
 }
 
 #lyrics-container {
-    position: absolute;
-    top: 75vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    font-size: 5rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    color: transparent;
-    -webkit-text-stroke: 1.5px #8faeb8;
-    pointer-events: none;
-    text-align: center;
-    line-height: 1.3;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 75vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #141414;
+  pointer-events: none;
+  text-align: center;
+  line-height: 1.3;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, color 1.5s ease-in-out, -webkit-text-stroke 1.5s ease-in-out;
+}
+
+#lyrics-container.twilight-text {
+  color: white;
+  -webkit-text-stroke: 0px transparent;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
 .sky {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #a9f6f6;
-    border-bottom: 2px solid #0ab8f5;
-    box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #a9f6f6;
+  border-bottom: 2px solid #0ab8f5;
+  box-sizing: border-box;
 }
 
 .ground {
-    position: absolute;
-    top: 100vh;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: var(--bg-color);
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg-color);
 }
 
 .flower {
-    position: absolute;
-    opacity: 0.9;
+  position: absolute;
+  opacity: 0.9;
+}
+
+.bee-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #ff859d;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: -15px;
+  /* Pull it slightly over the bee */
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(255, 133, 157, 0.4);
+  z-index: 30;
+  position: relative;
+  letter-spacing: 0.5px;
 }
 
 .container {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 800px;
-    width: 100%;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
 }
 
 .bee {
-    width: 100px;
-    margin-bottom: 10px;
-    z-index: 20;
+  width: 100px;
+  margin-bottom: 10px;
+  z-index: 20;
 }
 
 h1 {
-    color: var(--text-color);
-    font-size: 2.2rem;
-    font-weight: 500;
-    margin-bottom: 40px;
-    letter-spacing: 0.5px;
+  color: var(--text-color);
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+  letter-spacing: 0.5px;
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15vw;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15vw;
+  width: 100%;
 }
 
 .btn {
-    border: none;
-    padding: 12px 30px;
-    border-radius: 30px;
-    font-size: 1.25rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 1.25rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .btn:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 .no-btn {
-    background-color: var(--btn-no);
+  background-color: var(--btn-no);
 }
 
 .no-btn:hover {
-    background-color: #f78da5;
-    box-shadow: 0 6px 12px rgba(255, 142, 168, 0.3);
+  background-color: #f78da5;
+  box-shadow: 0 6px 12px rgba(255, 142, 168, 0.3);
 }
 
 .yes-btn {
-    background-color: var(--btn-yes);
+  background-color: var(--btn-yes);
 }
 
 .yes-btn:hover {
-    background-color: #27d014;
-    box-shadow: 0 6px 12px rgba(32, 202, 21, 0.3);
+  background-color: #27d014;
+  box-shadow: 0 6px 12px rgba(32, 202, 21, 0.3);
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
 
-    50% {
-        transform: translateY(-8px) rotate(4deg);
-    }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
 
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
 }
 
 .flower {
-    animation: float 5s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite;
 }
 
 .flower:nth-child(even) {
-    animation-delay: 1.5s;
-    animation-duration: 6s;
+  animation-delay: 1.5s;
+  animation-duration: 6s;
 }
 
-.flower:nth-child(n+3) {
-    animation-delay: 0.5s;
-    animation-duration: 7s;
+.flower:nth-child(n + 3) {
+  animation-delay: 0.5s;
+  animation-duration: 7s;
 }
 
 @keyframes bounceBee {
 
-    0%,
-    100% {
-        transform: translateY(0) rotate(0);
-    }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
 
-    50% {
-        transform: translateY(-10px) rotate(2deg);
-    }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
 }
 
 .bee {
-    animation: bounceBee 3s ease-in-out infinite;
+  animation: bounceBee 3s ease-in-out infinite;
 }
 
 /* Mobile View Adjustments */
 @media screen and (max-width: 768px) {
-    h1 {
-        font-size: 1.6rem;
-        margin-bottom: 30px;
-    }
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+  }
 
-    .buttons {
-        gap: 8vw;
-    }
+  .buttons {
+    gap: 8vw;
+  }
 
-    .btn {
-        padding: 10px 20px;
-        font-size: 1.1rem;
-    }
+  .btn {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+  }
 
-    .bee {
-        width: 80px;
-    }
+  .bee {
+    width: 80px;
+  }
 
-    #lyrics-container {
-        font-size: 2.2rem;
-        -webkit-text-stroke: 1px #8faeb8;
-    }
+  #lyrics-container {
+    font-size: 2.2rem;
+    -webkit-text-stroke: 1px #8faeb8;
+  }
+
+  img[src="media/bigFlower.png"] {
+    transform-origin: bottom center;
+    transform: scale(0.6);
+  }
 }
