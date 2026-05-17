@@ -1,67 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gift For You</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="background-decorations">
-      <img
-        src="media/pinkflower.gif"
-        class="flower"
-        style="top: 15%; left: 10%; width: 50px"
-      />
-      <img
-        src="media/purple flower.gif"
-        class="flower"
-        style="top: 10%; right: 30%; width: 45px"
-      />
-      <img
-        src="media/pinkflower.gif"
-        class="flower"
-        style="top: 25%; right: 15%; width: 25px"
-      />
-      <img
-        src="media/pinkflower.gif"
-        class="flower"
-        style="bottom: 20%; left: 8%; width: 45px"
-      />
-      <img
-        src="media/purple flower.gif"
-        class="flower"
-        style="bottom: 10%; left: 30%; width: 40px"
-      />
-      <img
-        src="media/pinkflower.gif"
-        class="flower"
-        style="bottom: 15%; right: 15%; width: 60px"
-      />
-    </div>
 
-    <div class="container">
-      <img
-        src="media/02ce7945c01a4d62f78e480ca9c51f00.gif"
-        class="bee"
-        alt="Cute bee"
-      />
-      <h1>Are you ready for your gift, baby?</h1>
-      <div class="buttons">
-        <button id="noBtn" class="btn no-btn">hell naw</button>
-        <button id="yesBtn" class="btn yes-btn">YES YES</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift For You</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="world">
+    <!-- Unmoving sky and ground elements -->
+    <div class="sky"></div>
+    <div class="ground"></div>
+
+    <div id="lyrics-container"></div>
+
+    <!-- Infinitely scrolling wrapper -->
+    <div id="scroll-wrapper">
+      <!-- Chunk 1 -->
+      <div class="scroll-chunk">
+        <!-- Big Flowers -->
+        <img src="media/bigFlower.png" style="position: absolute; top: 48vh; left: 60vw; height: 50vh; z-index: 4;">
+        <img src="media/bigFlower.png" style="position: absolute; top: 45vh; left: 160vw; height: 60vh; z-index: 5;">
+        <img src="media/bigFlower.png" style="position: absolute; top: 42vh; left: 260vw; height: 75vh; z-index: 6;">
+
+        <!-- Flowers visible during flight (top: 100vh - 125vh) -->
+        <img src="media/pinkflower.gif" class="flower" style="top: 110vh; left: 10vw; width: 50px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 105vh; left: 70vw; width: 45px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 118vh; left: 85vw; width: 25px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 112vh; left: 120vw; width: 55px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 108vh; left: 180vw; width: 35px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 115vh; left: 220vw; width: 45px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 106vh; left: 280vw; width: 50px;">
+
+        <!-- Flowers visible initially before taking off (top: 150vh - 200vh) -->
+        <img src="media/pinkflower.gif" class="flower" style="top: 180vh; left: 8vw; width: 45px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 190vh; left: 30vw; width: 40px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 185vh; left: 85vw; width: 60px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 170vh; left: 150vw; width: 35px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 180vh; left: 250vw; width: 55px;">
+      </div>
+
+      <!-- Chunk 2 (Exact Duplicate) -->
+      <div class="scroll-chunk">
+        <!-- Big Flowers -->
+        <img src="media/bigFlower.png" style="position: absolute; top: 48vh; left: 60vw; height: 50vh; z-index: 4;">
+        <img src="media/bigFlower.png" style="position: absolute; top: 45vh; left: 160vw; height: 60vh; z-index: 5;">
+        <img src="media/bigFlower.png" style="position: absolute; top: 42vh; left: 260vw; height: 75vh; z-index: 6;">
+
+        <!-- Flowers visible during flight (top: 100vh - 125vh) -->
+        <img src="media/pinkflower.gif" class="flower" style="top: 110vh; left: 10vw; width: 50px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 105vh; left: 70vw; width: 45px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 118vh; left: 85vw; width: 25px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 112vh; left: 120vw; width: 55px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 108vh; left: 180vw; width: 35px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 115vh; left: 220vw; width: 45px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 106vh; left: 280vw; width: 50px;">
+
+        <!-- Flowers visible initially before taking off (top: 150vh - 200vh) -->
+        <img src="media/pinkflower.gif" class="flower" style="top: 180vh; left: 8vw; width: 45px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 190vh; left: 30vw; width: 40px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 185vh; left: 85vw; width: 60px;">
+        <img src="media/purple flower.gif" class="flower" style="top: 170vh; left: 150vw; width: 35px;">
+        <img src="media/pinkflower.gif" class="flower" style="top: 180vh; left: 250vw; width: 55px;">
       </div>
     </div>
+  </div>
 
-    <audio
-      id="bgMusic"
-      src="media/Sixpence None the Richer - Kiss Me (Instrumental Edit).mp3"
-    ></audio>
+  <!-- Interface container -->
+  <div id="ui-container" class="container">
+    <img id="mainBee" src="media/02ce7945c01a4d62f78e480ca9c51f00.gif" class="bee" alt="Cute bee">
+    <h1 id="mainTitle">Are you ready for your gift, baby?</h1>
+    <div class="buttons" id="btnGroup">
+      <button id="noBtn" class="btn no-btn">hell naw</button>
+      <button id="yesBtn" class="btn yes-btn">YES YES</button>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <!-- Audio elements -->
+  <audio id="bgMusic" src="media/Sixpence None The Richer - Kiss Me (Official Music Video).mp3"></audio>
+  <audio id="rejectMusic" src="media/rejection.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
